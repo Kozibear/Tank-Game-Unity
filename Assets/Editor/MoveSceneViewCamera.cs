@@ -12,4 +12,5 @@ public class MoveSceneViewCamera
         SceneView.lastActiveSceneView.size = 100f;
         Selection.activeGameObject = Camera.main.gameObject;
     }
+	//comment
 }
