@@ -2,16 +2,16 @@
 
 public class CameraControl : MonoBehaviour
 {
-    public float m_DampTime = 0.2f;                 
+    public float m_DampTime = 0.2f; //the delay time before the camera starts to move to its place               
     public float m_ScreenEdgeBuffer = 4f;           
     public float m_MinSize = 6.5f;                  
-    [HideInInspector] public Transform[] m_Targets; 
+    /*[HideInInspector]*/ public Transform[] m_Targets; 
 
 
     private Camera m_Camera;                        
     private float m_ZoomSpeed;                      
     private Vector3 m_MoveVelocity;                 
-    private Vector3 m_DesiredPosition;              
+    private Vector3 m_DesiredPosition; //we find an average of the tanks' position and move the camera to it
 
 
     private void Awake()
@@ -92,7 +92,7 @@ public class CameraControl : MonoBehaviour
         return size;
     }
 
-
+	//this is public, so it can be called outside of this script
     public void SetStartPositionAndSize()
     {
         FindAveragePosition();
