@@ -5,7 +5,7 @@ public class CameraControl : MonoBehaviour
     public float m_DampTime = 0.2f; //the delay time before the camera starts to move to its place               
     public float m_ScreenEdgeBuffer = 4f;           
     public float m_MinSize = 6.5f;                  
-    /*[HideInInspector]*/ public Transform[] m_Targets; 
+    [HideInInspector] public Transform[] m_Targets; 
 
 
     private Camera m_Camera;                        
