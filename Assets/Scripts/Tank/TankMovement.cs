@@ -99,7 +99,7 @@ public class TankMovement : MonoBehaviour
 
 		m_Rigidbody.MovePosition (m_Rigidbody.position + movement);
 
-		m_Rigidbody.velocity = transform.forward * m_MovementInputValue * m_Speed;
+		//m_Rigidbody.velocity = transform.forward * m_MovementInputValue * m_Speed;
 
 	}
 
