@@ -17,13 +17,25 @@ public class TankHealth : MonoBehaviour
     private bool m_Dead;            
 
 
+	public GameObject gameManager;
+
     private void Awake()
     {
+		gameManager = GameObject.Find ("GameManager");
+
         m_ExplosionParticles = Instantiate(m_ExplosionPrefab).GetComponent<ParticleSystem>();
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
         m_ExplosionParticles.gameObject.SetActive(false);
     }
+
+	public void FixedUpdate()
+	{
+		if (gameManager.GetComponent<GameManager> ().m_timeLeft <= 0 && this.gameObject.tag == "Player") {
+
+			TakeDamage (100);
+		}
+	}
 
 
     private void OnEnable()

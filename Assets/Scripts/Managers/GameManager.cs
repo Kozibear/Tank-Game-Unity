@@ -12,8 +12,13 @@ public class GameManager : MonoBehaviour
     public Text m_MessageText;              
     public GameObject m_TankPrefab;
 	public GameObject m_InvisibleTankPrefab;
-    public TankManager[] m_Tanks;           
+    public TankManager[] m_Tanks;
 
+	//intervention:
+	public float m_timeLeft;
+	public float currentTime;
+	public Text m_TimeText;
+	public bool recordTime = false;
 
     private int m_RoundNumber;              
     private WaitForSeconds m_StartWait;     
@@ -31,6 +36,8 @@ public class GameManager : MonoBehaviour
         SetCameraTargets();
 
         StartCoroutine(GameLoop());
+
+		m_timeLeft = 99f;
     }
 
 
@@ -96,6 +103,8 @@ public class GameManager : MonoBehaviour
 		ResetAllTanks ();
 		DisableTankControl ();
 
+		m_timeLeft = 99f;
+
 		//m_CameraControl.SetStartPositionAndSize ();
 
 		m_RoundNumber++;
@@ -109,13 +118,33 @@ public class GameManager : MonoBehaviour
     {
 		EnableTankControl ();
 
+		recordTime = true;
+		currentTime = Time.time;
+
 		m_MessageText.text = string.Empty;
+
+		m_TimeText.text = m_timeLeft.ToString();
 		
 		while (!OneTankLeft())
 		{
        		yield return null;
 		}
     }
+
+	//intervention for recording Time
+	public void FixedUpdate()
+	{
+		if (recordTime && m_timeLeft > 0) {
+			m_timeLeft = 99 - Mathf.Round(Time.time-currentTime);
+
+			m_MessageText.text = string.Empty;
+
+			m_TimeText.text = m_timeLeft.ToString ();
+		} 
+		else {
+			m_TimeText.text = "Time!";
+		}
+	}
 
 
     private IEnumerator RoundEnding()
@@ -130,6 +159,8 @@ public class GameManager : MonoBehaviour
 			m_RoundWinner.m_Wins++;
 
 		m_GameWinner = GetGameWinner ();
+
+		recordTime = false;
 
 		string message = EndMessage ();
 		m_MessageText.text = message;
