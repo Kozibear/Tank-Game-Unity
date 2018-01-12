@@ -14,7 +14,9 @@ public class TankHealth : MonoBehaviour
     private AudioSource m_ExplosionAudio;          
     private ParticleSystem m_ExplosionParticles;   
     private float m_CurrentHealth;  
-    private bool m_Dead;            
+    private bool m_Dead;
+
+	public GameObject m_HPText;
 
 
 	public GameObject gameManager;
@@ -27,6 +29,8 @@ public class TankHealth : MonoBehaviour
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
         m_ExplosionParticles.gameObject.SetActive(false);
+
+		m_HPText = GameObject.Find ("HP");
     }
 
 	public void FixedUpdate()
@@ -34,6 +38,11 @@ public class TankHealth : MonoBehaviour
 		if (gameManager.GetComponent<GameManager> ().m_timeLeft <= 0 && this.gameObject.tag == "Player") {
 
 			TakeDamage (100);
+		}
+
+		if (this.gameObject.tag == "InvisiblePlayer")
+		{
+			m_HPText.GetComponent<Text> ().text = "HP: " + Mathf.Round(m_CurrentHealth);
 		}
 	}
 
@@ -71,6 +80,12 @@ public class TankHealth : MonoBehaviour
 
     private void OnDeath()
     {
+
+		if (this.gameObject.tag == "InvisiblePlayer")
+		{
+			m_HPText.GetComponent<Text>().text = "HP: 0";
+		}
+
         // Play the effects for the death of the tank and deactivate it.
 		m_Dead = true;
 
