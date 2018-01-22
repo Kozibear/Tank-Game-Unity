@@ -330,6 +330,10 @@ MonoBehaviour:
   m_ExplosionForce: 1000
   m_MaxLifeTime: 2
   m_ExplosionRadius: 5
+  renderscreen1: {fileID: 1697562970431206, guid: b4e856b8f2429454b82032c8d5106550,
+    type: 2}
+  renderscreen2: {fileID: 1968450925178132, guid: 142090b0fed6bc64bb6b47d1c1171d67,
+    type: 2}
 --- !u!136 &136654416970091634
 CapsuleCollider:
   m_ObjectHideFlags: 1

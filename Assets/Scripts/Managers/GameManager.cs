@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             targets[i] = m_Tanks[i].m_Instance.transform;
         }
 
-        m_CameraControl.m_Targets = targets;
+        //m_CameraControl.m_Targets = targets;
     }
 
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 		ResetAllTanks ();
 		DisableTankControl ();
 
-		m_CameraControl.SetStartPositionAndSize ();
+		//m_CameraControl.SetStartPositionAndSize ();
 
 		m_RoundNumber++;
 		m_MessageText.text = "ROUND " + m_RoundNumber;

@@ -79,6 +79,13 @@ public class TankShooting : MonoBehaviour
 
 		shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 1) {
+			shellInstance.GetComponent<ShellExplosion> ().shellNumber = 1;
+		}
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 2) {
+			shellInstance.GetComponent<ShellExplosion> ().shellNumber = 2;
+		}
+
 		m_ShootingAudio.clip = m_FireClip;
 		m_ShootingAudio.Play ();
 

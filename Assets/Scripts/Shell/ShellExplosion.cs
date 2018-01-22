@@ -10,6 +10,10 @@ public class ShellExplosion : MonoBehaviour
     public float m_MaxLifeTime = 2f;                  
     public float m_ExplosionRadius = 5f;              
 
+	public GameObject renderscreen1;
+	public GameObject renderscreen2;
+
+	public float shellNumber;
 
     private void Start()
     {
@@ -19,6 +23,17 @@ public class ShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+		//for the lights, camera intervention:
+		if (other.gameObject.tag == "floor") {
+
+			if (shellNumber == 1) {
+				Instantiate (renderscreen1, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (90, this.transform.rotation.eulerAngles.y, 180) /*this.transform.rotation*/);
+			}
+			if (shellNumber == 2) {
+				Instantiate (renderscreen2, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (90, this.transform.rotation.eulerAngles.y, 180) /*this.transform.rotation*/);
+			}
+		}
+
         // Find all the tanks in an area around the shell and damage them.
 		Collider[] colliders = Physics.OverlapSphere (transform.position, m_ExplosionRadius, m_TankMask);
 
@@ -52,8 +67,7 @@ public class ShellExplosion : MonoBehaviour
 		Destroy (m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
 		Destroy (gameObject); //and then the entire gameObject is destroyed
     }
-
-
+		
     private float CalculateDamage(Vector3 targetPosition)
     {
         // Calculate the amount of damage a target should take based on it's position.
