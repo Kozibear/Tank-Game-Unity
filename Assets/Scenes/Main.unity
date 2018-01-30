@@ -9687,26 +9687,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4071136642695984, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4071136642695984, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4071136642695984, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4071136642695984, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4071136642695984, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
     - target: {fileID: 1012679082430162, guid: cd454289d2cbc76478508be35efabc9b, type: 2}
       propertyPath: m_IsActive
       value: 0
