@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DummyShell : MonoBehaviour {
+
+	public LayerMask m_TankMask;
+	public ParticleSystem m_ExplosionParticles;       
+	public AudioSource m_ExplosionAudio;              
+	public float m_MaxDamage = 100f;                  
+	public float m_ExplosionForce = 1000f;            
+	public float m_MaxLifeTime = 2f;                  
+	public float m_ExplosionRadius = 5f;
+
+	public Rigidbody RealShell;
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+
+	void Update () {
+		if (RealShell != null) {
+			this.transform.position = RealShell.transform.position + new Vector3 (0, -180, 0);
+			this.transform.rotation = RealShell.transform.rotation;
+		}
+	}
+	
+	private void OnTriggerEnter(Collider other)
+	{
+		m_ExplosionParticles.transform.parent = null; //we no longer make it have a parent
+
+		m_ExplosionParticles.Play ();
+
+		m_ExplosionAudio.Play ();
+
+		//so that only the explosion particles are destroyed once their duration is elapsed
+		Destroy (m_ExplosionParticles.gameObject, m_ExplosionParticles.duration);
+		Destroy (gameObject); //and then the entire gameObject is destroyed
+	}
+
+	private float CalculateDamage(Vector3 targetPosition)
+	{
+		// Calculate the amount of damage a target should take based on it's position.
+		Vector3 explosionToTarget = targetPosition - transform.position;
+
+		float explosionDistance = explosionToTarget.magnitude;
+
+		float relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;
+
+		float damage = relativeDistance * m_MaxDamage;
+
+		damage = Mathf.Max (0f, damage); //we make sure that it's not negative
+
+		return damage;
+	}
+}

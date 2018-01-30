@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds m_StartWait;     
     private WaitForSeconds m_EndWait;       
     private TankManager m_RoundWinner;
-    private TankManager m_GameWinner;       
+    private TankManager m_GameWinner;   
 
 
     private void Start()
@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
 		ResetAllTanks ();
 		DisableTankControl ();
+
 
 		//m_CameraControl.SetStartPositionAndSize ();
 

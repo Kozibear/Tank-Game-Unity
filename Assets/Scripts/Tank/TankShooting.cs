@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class TankShooting : MonoBehaviour
 {
     public int m_PlayerNumber = 1;       
-    public Rigidbody m_Shell;            
+    public Rigidbody m_Shell;
+	public Rigidbody m_DummyShell;
     public Transform m_FireTransform;    
     public Slider m_AimSlider;           
     public AudioSource m_ShootingAudio;  
@@ -14,11 +15,11 @@ public class TankShooting : MonoBehaviour
     public float m_MaxLaunchForce = 30f; 
     public float m_MaxChargeTime = 0.75f;
 
-    
     private string m_FireButton;         
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
-    private bool m_Fired;                
+    private bool m_Fired;
+
 
 
     private void OnEnable()
@@ -68,8 +69,7 @@ public class TankShooting : MonoBehaviour
 			Fire();
 		}
 	}
-
-
+		
     private void Fire()
     {
         // Instantiate and launch the shell.
@@ -81,14 +81,20 @@ public class TankShooting : MonoBehaviour
 
 		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 1) {
 			shellInstance.GetComponent<ShellExplosion> ().shellNumber = 1;
+			shellInstance.GetComponent<ShellExplosion> ().shooter = this.gameObject; //making each shell have a reference to the tank that spawned it
 		}
 		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 2) {
 			shellInstance.GetComponent<ShellExplosion> ().shellNumber = 2;
+			shellInstance.GetComponent<ShellExplosion> ().shooter = this.gameObject; //making each shell have a reference to the tank that spawned it
 		}
-
+	
 		m_ShootingAudio.clip = m_FireClip;
 		m_ShootingAudio.Play ();
 
 		m_CurrentLaunchForce = m_MinLaunchForce;
+
+		Rigidbody shellInstance2 = Instantiate (m_DummyShell, m_FireTransform.position + new Vector3 (0, -100, 0), m_FireTransform.rotation) as Rigidbody;
+
+		shellInstance2.GetComponent<DummyShell> ().RealShell = shellInstance;
     }
 }

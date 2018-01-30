@@ -10,28 +10,112 @@ public class ShellExplosion : MonoBehaviour
     public float m_MaxLifeTime = 2f;                  
     public float m_ExplosionRadius = 5f;              
 
-	public GameObject renderscreen1;
-	public GameObject renderscreen2;
+	public GameObject Tank1RenderCanvas1;
+	public GameObject Tank1RenderCanvas2;
+	public GameObject Tank1RenderCanvas3;
+	public GameObject Tank1RenderCanvas4;
+	public GameObject Tank1RenderCanvas5;
+
+	public GameObject Tank2RenderCanvas1;
+	public GameObject Tank2RenderCanvas2;
+	public GameObject Tank2RenderCanvas3;
+	public GameObject Tank2RenderCanvas4;
+	public GameObject Tank2RenderCanvas5;
+
+	public GameObject shooter;
 
 	public float shellNumber;
 
     private void Start()
     {
         Destroy(gameObject, m_MaxLifeTime);
-    }
+	}
 
 
     private void OnTriggerEnter(Collider other)
-    {
+	{
 		//for the lights, camera intervention:
 		if (other.gameObject.tag == "floor") {
+			
+			if(shellNumber == 1) {
 
-			if (shellNumber == 1) {
-				Instantiate (renderscreen1, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (90, this.transform.rotation.eulerAngles.y, 180) /*this.transform.rotation*/);
+				//first, we check to see if there are too many render textures onscreen, and we delete the oldest one
+				if (shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject != null) {
+					shooter.GetComponent<TankRenderScreenControl> ().DeleteOldestScreen();
+				}
+
+				if (shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject == null) {
+					GameObject screen = Instantiate (Tank1RenderCanvas1, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject == null) {
+					GameObject screen = Instantiate (Tank1RenderCanvas2, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject == null) {
+					GameObject screen = Instantiate (Tank1RenderCanvas3, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject == null) {
+					GameObject screen = Instantiate (Tank1RenderCanvas4, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject == null) {
+					GameObject screen = Instantiate (Tank1RenderCanvas5, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject = screen;
+				}
 			}
+				
 			if (shellNumber == 2) {
-				Instantiate (renderscreen2, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (90, this.transform.rotation.eulerAngles.y, 180) /*this.transform.rotation*/);
+
+				//first, we check to see if there are too many render textures onscreen, and we delete the oldest one
+				if (shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject != null && shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject != null) {
+					shooter.GetComponent<TankRenderScreenControl> ().DeleteOldestScreen();
+				}
+
+				if (shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject == null) {
+					GameObject screen = Instantiate (Tank2RenderCanvas1, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen1GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject == null) {
+					GameObject screen = Instantiate (Tank2RenderCanvas2, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen2GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject == null) {
+					GameObject screen = Instantiate (Tank2RenderCanvas3, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen3GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject == null) {
+					GameObject screen = Instantiate (Tank2RenderCanvas4, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen4GameObject = screen;
+
+				} else if (shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject == null) {
+					GameObject screen = Instantiate (Tank2RenderCanvas5, transform.position + new Vector3 (0, 1.5f, 0), Quaternion.Euler (0, this.transform.rotation.eulerAngles.y - 180, 0));
+					screen.GetComponent<screenScript> ().CorrespondingTank = shooter;
+					shooter.GetComponent<TankRenderScreenControl> ().Screen5GameObject = screen;
+				} 
 			}
+		}
+
+		if (other.gameObject.tag == "redscreen" && shellNumber == 1) {
+
+			other.GetComponent<screenScript> ().explode = true;
+			Destroy (gameObject); //we destroy the shell so that there aren't two explosions
+		}
+
+		if (other.gameObject.tag == "bluescreen" && shellNumber == 2) {
+
+			other.GetComponent<screenScript> ().explode = true;
+			Destroy (gameObject); //we destroy the shell so that there aren't two explosions
 		}
 
         // Find all the tanks in an area around the shell and damage them.
