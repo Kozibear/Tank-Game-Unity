@@ -93,7 +93,7 @@ public class TankShooting : MonoBehaviour
 
 		m_CurrentLaunchForce = m_MinLaunchForce;
 
-		Rigidbody shellInstance2 = Instantiate (m_DummyShell, m_FireTransform.position + new Vector3 (0, -100, 0), m_FireTransform.rotation) as Rigidbody;
+		Rigidbody shellInstance2 = Instantiate (m_DummyShell, m_FireTransform.position + new Vector3 (0, -180, 0), m_FireTransform.rotation) as Rigidbody;
 
 		shellInstance2.GetComponent<DummyShell> ().RealShell = shellInstance;
     }

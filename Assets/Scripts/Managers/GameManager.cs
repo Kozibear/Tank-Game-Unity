@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
     private WaitForSeconds m_StartWait;     
     private WaitForSeconds m_EndWait;       
     private TankManager m_RoundWinner;
-    private TankManager m_GameWinner;   
+    private TankManager m_GameWinner;
+
+	public Slider RedSlider;
+	public Slider BlueSlider;
 
 
     private void Start()
@@ -114,6 +117,15 @@ public class GameManager : MonoBehaviour
 
 		if (m_RoundWinner != null)
 			m_RoundWinner.m_Wins++;
+
+		if (m_RoundWinner.m_PlayerNumber == 1)
+		{
+			RedSlider.GetComponent<SliderValue> ().SetValueToZero ();
+		}
+		if (m_RoundWinner.m_PlayerNumber == 2)
+		{
+			BlueSlider.GetComponent<SliderValue> ().SetValueToZero ();
+		}
 
 		m_GameWinner = GetGameWinner ();
 

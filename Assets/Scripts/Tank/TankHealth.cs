@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class TankHealth : MonoBehaviour
 {
     public float m_StartingHealth = 100f;          
-    public Slider m_Slider;                        
+    public Slider m_Slider;
+	public Slider m_Slider2;
     public Image m_FillImage;                      
     public Color m_FullHealthColor = Color.green;  
     public Color m_ZeroHealthColor = Color.red;    
@@ -23,6 +24,9 @@ public class TankHealth : MonoBehaviour
         m_ExplosionAudio = m_ExplosionParticles.GetComponent<AudioSource>();
 
         m_ExplosionParticles.gameObject.SetActive(false);
+
+		m_Slider = GameObject.Find ("BlueSlider").GetComponent<Slider>();
+		m_Slider2 = GameObject.Find ("RedSlider").GetComponent<Slider>();
     }
 
 
@@ -43,6 +47,12 @@ public class TankHealth : MonoBehaviour
 		SetHealthUI ();
 
 		if (m_CurrentHealth <= 0f && !m_Dead) {
+			if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 1) {
+				m_Slider.value = 0;
+			}
+			if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 2) {
+				m_Slider2.value = 0;
+			}
 			OnDeath ();
 		}
 	}
@@ -51,14 +61,25 @@ public class TankHealth : MonoBehaviour
     private void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
-		m_Slider.value = m_CurrentHealth;
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 1) {
+			m_Slider.value = m_CurrentHealth;
+		}
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 2) {
+			m_Slider2.value = m_CurrentHealth;
+		}
 
-		m_FillImage.color = Color.Lerp (m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
+		//m_FillImage.color = Color.Lerp (m_ZeroHealthColor, m_FullHealthColor, m_CurrentHealth / m_StartingHealth);
     }
 
 
     private void OnDeath()
     {
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 1) {
+			m_Slider.value = 0;
+		}
+		if (this.gameObject.GetComponent<TankMovement> ().m_PlayerNumber == 2) {
+			m_Slider2.value = 0;
+		}
         // Play the effects for the death of the tank and deactivate it.
 		m_Dead = true;
 

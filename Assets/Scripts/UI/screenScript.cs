@@ -20,6 +20,11 @@ public class screenScript : MonoBehaviour {
 	public float m_MaxLifeTime = 2f;                  
 	public float m_ExplosionRadius = 5f;
 
+	public Rigidbody Shell;
+	public GameObject ShellSpawnPoint;
+
+	public Rigidbody DummyShell;
+
 	// Use this for initialization
 	void Start () {
 
@@ -88,5 +93,17 @@ public class screenScript : MonoBehaviour {
 		damage = Mathf.Max (0f, damage); //we make sure that it's not negative
 
 		return damage;
+	}
+
+	public void ShootMissile ()
+	{
+		Rigidbody shellInstance = Instantiate (Shell, ShellSpawnPoint.transform.position, ShellSpawnPoint.transform.rotation) as Rigidbody;
+
+		shellInstance.velocity = 15 * ShellSpawnPoint.transform.forward;
+
+
+		Rigidbody shellInstance2 = Instantiate (DummyShell, ShellSpawnPoint.transform.position + new Vector3 (0, -180, 0), ShellSpawnPoint.transform.rotation) as Rigidbody;
+
+		shellInstance2.GetComponent<DummyShell> ().RealShell = shellInstance;
 	}
 }

@@ -112,10 +112,22 @@ public class ShellExplosion : MonoBehaviour
 			Destroy (gameObject); //we destroy the shell so that there aren't two explosions
 		}
 
+		if (other.gameObject.tag == "redscreen" && shellNumber == 2) {
+			other.GetComponent<screenScript> ().ShootMissile ();
+			Destroy (m_ExplosionParticles.gameObject);
+			Destroy (this.gameObject);
+		}
+
 		if (other.gameObject.tag == "bluescreen" && shellNumber == 2) {
 
 			other.GetComponent<screenScript> ().explode = true;
 			Destroy (gameObject); //we destroy the shell so that there aren't two explosions
+		}
+
+		if (other.gameObject.tag == "bluescreen" && shellNumber == 1) {
+			other.GetComponent<screenScript> ().ShootMissile ();
+			Destroy (m_ExplosionParticles.gameObject);
+			Destroy (this.gameObject);
 		}
 
         // Find all the tanks in an area around the shell and damage them.
