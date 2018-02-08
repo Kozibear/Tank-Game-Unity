@@ -86,6 +86,27 @@ public class GameManager : MonoBehaviour
 		m_RoundNumber++;
 		m_MessageText.text = "ROUND " + m_RoundNumber;
 
+		//we choose which tank to activate
+		if (!this.gameObject.GetComponent<MusicManager> ().blueTankControls && !this.gameObject.GetComponent<MusicManager> ().redTankControls) {
+
+			float randomNumber;
+			randomNumber = Random.Range (0, 2);
+			if (randomNumber == 0) {
+				this.gameObject.GetComponent<MusicManager> ().redTankControls = true;
+			}
+			if (randomNumber == 1) {
+				this.gameObject.GetComponent<MusicManager> ().blueTankControls = true;
+			}
+		} 
+		else if (this.gameObject.GetComponent<MusicManager> ().blueTankControls) {
+			this.gameObject.GetComponent<MusicManager> ().blueTankControls = false;
+			this.gameObject.GetComponent<MusicManager> ().redTankControls = true;
+		}
+		else if (this.gameObject.GetComponent<MusicManager> ().redTankControls) {
+			this.gameObject.GetComponent<MusicManager> ().redTankControls = false;
+			this.gameObject.GetComponent<MusicManager> ().blueTankControls = true;
+		}
+
         yield return m_StartWait;
     }
 
@@ -95,7 +116,9 @@ public class GameManager : MonoBehaviour
 		EnableTankControl ();
 
 		m_MessageText.text = string.Empty;
-		
+
+		this.gameObject.GetComponent<MusicManager> ().canAccessControls = true;
+
 		while (!OneTankLeft())
 		{
        		yield return null;
@@ -106,6 +129,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundEnding()
     {
 		DisableTankControl ();
+
+		this.gameObject.GetComponent<MusicManager> ().canAccessControls = false;
 
 		m_RoundWinner = null;
 
