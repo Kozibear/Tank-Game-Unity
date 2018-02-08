@@ -14,7 +14,8 @@ public class TankShooting : MonoBehaviour
     public float m_MaxLaunchForce = 30f; 
     public float m_MaxChargeTime = 0.75f;
 
-    
+	public bool canShoot;
+
     private string m_FireButton;         
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
@@ -40,32 +41,33 @@ public class TankShooting : MonoBehaviour
     {
         // Track the current state of the fire button and make decisions based on the current launch force.
 		m_AimSlider.value = m_MinLaunchForce;
-	
-		if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 
-			//at max charge, not fired yet
-			m_CurrentLaunchForce = m_MaxLaunchForce;
-			Fire ();
-		}
-		else if (Input.GetButtonDown (m_FireButton)) {
-			//have we pressed fire for the first time?
-			m_Fired = false;
-			m_CurrentLaunchForce = m_MinLaunchForce;
+		if (canShoot) {
+			if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 
-			m_ShootingAudio.clip = m_ChargingClip;
-			m_ShootingAudio.Play ();
-		} 
-		else if (Input.GetButton (m_FireButton) && !m_Fired) {
+				//at max charge, not fired yet
+				m_CurrentLaunchForce = m_MaxLaunchForce;
+				Fire ();
+			} else if (Input.GetButtonDown (m_FireButton)) {
+				//have we pressed fire for the first time?
+				m_Fired = false;
+				m_CurrentLaunchForce = m_MinLaunchForce;
 
-			//holding the fire button, not yet fired
-			m_CurrentLaunchForce += m_ChargeSpeed *Time.deltaTime;
+				m_ShootingAudio.clip = m_ChargingClip;
+				m_ShootingAudio.Play ();
+			} else if (Input.GetButton (m_FireButton) && !m_Fired) {
 
-			m_AimSlider.value = m_CurrentLaunchForce;
-		}
-		else if (Input.GetButtonUp (m_FireButton) && !m_Fired) {
+				//holding the fire button, not yet fired
+				m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
 
-			//we release the button, having not yet fired
-			Fire();
+				m_AimSlider.value = m_CurrentLaunchForce;
+			} else if (Input.GetButtonUp (m_FireButton) && !m_Fired) {
+
+				//we release the button, having not yet fired
+				GameObject.Find("Word").GetComponent<currentWords>().numberSelector();
+				Fire ();
+			}
+
 		}
 	}
 

@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     public Text m_MessageText;              
     public GameObject m_TankPrefab;         
     public TankManager[] m_Tanks;           
+	public GameObject TimeText;
+	public GameObject LyricText;
 
+	public bool countDownExplosion;
 
     private int m_RoundNumber;              
     private WaitForSeconds m_StartWait;     
@@ -31,6 +34,95 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(GameLoop());
     }
+
+	public void Update()
+	{
+		//if the timer reaches the end, we make the current tank that can shoot other tanks explode
+		if (TimeText.GetComponent<TimeCountdown> ().currentTime <= 0 && countDownExplosion) {
+			if (this.gameObject.GetComponent<MusicManager> ().redTankControls) {
+				m_Tanks [1].m_Instance.GetComponent<TankHealth> ().OnDeath ();
+				countDownExplosion = false;
+			}
+			if (this.gameObject.GetComponent<MusicManager> ().blueTankControls) {
+				m_Tanks [0].m_Instance.GetComponent<TankHealth> ().OnDeath ();
+				countDownExplosion = false;
+			}	
+		}
+
+		if (this.gameObject.GetComponent<MusicManager> ().blueTankControls && this.gameObject.GetComponent<MusicManager> ().normalTheme.isPlaying) {
+			
+			if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 7 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 9) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 12 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 14f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 18 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 20f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 25 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 27f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 31 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 33f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 34 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 35f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 37 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 39f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 44 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 46f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 47 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 49f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 51 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 53f) {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			} 
+			else {
+				m_Tanks [0].m_Instance.GetComponent<TankShooting> ().canShoot = false;
+			}
+		}
+
+		if (this.gameObject.GetComponent<MusicManager> ().redTankControls && this.gameObject.GetComponent<MusicManager> ().normalTheme.isPlaying) {
+
+			if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 6 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 8) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 12 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 13.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 18 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 19.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 25 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 26.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 31 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 32.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 34 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 34.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 37 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 38.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 44 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 45.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 47 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 48.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			}
+			else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 51 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 52.5f) {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = true;
+			} 
+			else {
+				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = false;
+			}
+		}
+	}
 
 
     private void SpawnAllTanks()
@@ -81,6 +173,10 @@ public class GameManager : MonoBehaviour
 		ResetAllTanks ();
 		DisableTankControl ();
 
+		TimeText.GetComponent<TimeCountdown> ().currentTime = 99;
+
+		countDownExplosion = true;
+
 		m_CameraControl.SetStartPositionAndSize ();
 
 		m_RoundNumber++;
@@ -114,6 +210,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundPlaying()
     {
 		EnableTankControl ();
+
+		TimeText.GetComponent<TimeCountdown> ().StartCoroutine("TimeLoop");
 
 		m_MessageText.text = string.Empty;
 
