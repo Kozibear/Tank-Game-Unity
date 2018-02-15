@@ -35,7 +35,6 @@ public class MusicManager : MonoBehaviour {
 			//the moment that we press down on the W key, and we're not pressing the S key, we start playing the normal song
 			//Or alternatively, it also works if we're currently pressing the key and we lift up the other key
 			if ((Input.GetKeyDown (KeyCode.W) && !Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.W) && Input.GetKeyUp (KeyCode.S)) && !normalTheme.isPlaying) {
-
 				PlayNormalSong ();
 			}
 

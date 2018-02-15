@@ -187,13 +187,16 @@ public class GameManager : MonoBehaviour
 
 			float randomNumber;
 			randomNumber = Random.Range (0, 2);
+
 			if (randomNumber == 0) {
+				print (randomNumber);
 				this.gameObject.GetComponent<MusicManager> ().redTankControls = true;
 			}
 			if (randomNumber == 1) {
+				print (randomNumber);
 				this.gameObject.GetComponent<MusicManager> ().blueTankControls = true;
 			}
-		} 
+		}
 		else if (this.gameObject.GetComponent<MusicManager> ().blueTankControls) {
 			this.gameObject.GetComponent<MusicManager> ().blueTankControls = false;
 			this.gameObject.GetComponent<MusicManager> ().redTankControls = true;
