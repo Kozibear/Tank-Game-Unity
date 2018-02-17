@@ -15,12 +15,16 @@ public class TankShooting : MonoBehaviour
     public float m_MaxChargeTime = 0.75f;
 
 	public bool canShoot;
+	public bool canShoot2;
 
     private string m_FireButton;         
     private float m_CurrentLaunchForce;  
     private float m_ChargeSpeed;         
-    private bool m_Fired;                
+    private bool m_Fired;
 
+	public GameObject lyrics;
+	public GameObject gameManager;
+	public GameObject time;
 
     private void OnEnable()
     {
@@ -43,6 +47,7 @@ public class TankShooting : MonoBehaviour
 		m_AimSlider.value = m_MinLaunchForce;
 
 		if (canShoot) {
+
 			if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 
 				//at max charge, not fired yet
@@ -64,16 +69,37 @@ public class TankShooting : MonoBehaviour
 			} else if (Input.GetButtonUp (m_FireButton) && !m_Fired) {
 
 				//we release the button, having not yet fired
-				GameObject.Find("Word").GetComponent<currentWords>().numberSelector();
+				lyrics.GetComponent<currentWords>().numberSelector();
 				Fire ();
 			}
 
 		}
 	}
 
-
     private void Fire()
     {
+		canShoot = false;
+		if (gameManager.GetComponent<MusicManager> ().blueTankControls) {
+			gameManager.GetComponent<MusicManager> ().blueTankControls = false;
+			gameManager.GetComponent<MusicManager> ().redTankControls = true;
+
+			gameManager.GetComponent<MusicManager> ().PauseNormalSong ();
+			gameManager.GetComponent<MusicManager> ().exceptionHoldDown = true;
+
+			time.GetComponent<TimeCountdown>().resetNumber();
+		}
+		else if (gameManager.GetComponent<MusicManager> ().redTankControls) {
+			gameManager.GetComponent<MusicManager> ().redTankControls = false;
+			gameManager.GetComponent<MusicManager> ().blueTankControls = true;
+
+			gameManager.GetComponent<MusicManager> ().PauseNormalSong ();
+			gameManager.GetComponent<MusicManager> ().exceptionHoldDown = true;
+
+			time.GetComponent<TimeCountdown>().resetNumber();
+		}
+
+		canShoot = true;
+
         // Instantiate and launch the shell.
 		m_Fired = true;
 

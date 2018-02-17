@@ -10,6 +10,7 @@ public class ShellExplosion : MonoBehaviour
     public float m_MaxLifeTime = 2f;                  
     public float m_ExplosionRadius = 5f;              
 
+	public GameObject explosion;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class ShellExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+		/*
         // Find all the tanks in an area around the shell and damage them.
 		Collider[] colliders = Physics.OverlapSphere (transform.position, m_ExplosionRadius, m_TankMask);
 
@@ -41,6 +43,8 @@ public class ShellExplosion : MonoBehaviour
 
 			targetHealth.TakeDamage (damage);
 		}
+		*/
+		Instantiate (explosion, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), explosion.transform.rotation);
 
 		m_ExplosionParticles.transform.parent = null; //we no longer make it have a parent
 

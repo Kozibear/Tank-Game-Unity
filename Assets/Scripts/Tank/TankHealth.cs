@@ -71,4 +71,12 @@ public class TankHealth : MonoBehaviour
 
 		gameObject.SetActive (false);
     }
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "explosion") {
+			m_CurrentHealth = 0;
+			OnDeath ();
+		}
+	}
 }
