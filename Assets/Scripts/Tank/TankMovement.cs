@@ -55,6 +55,15 @@ public class TankMovement : MonoBehaviour
 		m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
 
 		EngineAudio ();
+
+
+		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age < 20) {
+			transform.localScale += new Vector3 (0.0015f, 0.0015f, 0.0015f);
+		}
+
+		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age >= 20) {
+		}
+
     }
 
 

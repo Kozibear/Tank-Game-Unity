@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public CameraControl m_CameraControl;   
     public Text m_MessageText;              
     public GameObject m_TankPrefab;         
-    public TankManager[] m_Tanks;           
+    public TankManager[] m_Tanks;
 
+	public GameObject blueText;
+	public GameObject redText;
 
     private int m_RoundNumber;              
     private WaitForSeconds m_StartWait;     
@@ -57,7 +59,6 @@ public class GameManager : MonoBehaviour
         m_CameraControl.m_Targets = targets;
     }
 
-
     private IEnumerator GameLoop()
     {
 		//it goes through these three coroutines, then checks to see if there was a winner or
@@ -86,6 +87,14 @@ public class GameManager : MonoBehaviour
 		m_RoundNumber++;
 		m_MessageText.text = "ROUND " + m_RoundNumber;
 
+		blueText.GetComponent<tankAge>().tank = m_Tanks [0].m_Instance;
+		blueText.GetComponent<tankAge> ().age = 0;
+		m_Tanks [0].m_Instance.gameObject.GetComponent<TankShooting> ().thisTankAge = blueText;
+
+		redText.GetComponent<tankAge>().tank = m_Tanks [1].m_Instance;
+		redText.GetComponent<tankAge> ().age = 0;
+		m_Tanks[1].m_Instance.gameObject.GetComponent<TankShooting> ().thisTankAge = redText;
+
         yield return m_StartWait;
     }
 
@@ -93,6 +102,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundPlaying()
     {
 		EnableTankControl ();
+
+		blueText.GetComponent<tankAge> ().StartCoroutine ("TimeLoop");
+		redText.GetComponent<tankAge> ().StartCoroutine ("TimeLoop");
 
 		m_MessageText.text = string.Empty;
 		
@@ -105,6 +117,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
+		blueText.GetComponent<tankAge> ().StopCoroutine ("TimeLoop");
+		redText.GetComponent<tankAge> ().StopCoroutine ("TimeLoop");
+
 		DisableTankControl ();
 
 		m_RoundWinner = null;

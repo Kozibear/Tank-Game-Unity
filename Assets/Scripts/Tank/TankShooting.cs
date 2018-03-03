@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class TankShooting : MonoBehaviour
 {
     public int m_PlayerNumber = 1;       
-    public Rigidbody m_Shell;            
+    public Rigidbody m_Shell;   
+	public Rigidbody m_egg;
     public Transform m_FireTransform;    
     public Slider m_AimSlider;           
     public AudioSource m_ShootingAudio;  
@@ -14,6 +15,9 @@ public class TankShooting : MonoBehaviour
     public float m_MaxLaunchForce = 30f; 
     public float m_MaxChargeTime = 0.75f;
 
+	public Rigidbody egg;
+	public GameObject thisTankAge;
+	public bool mature;
     
     private string m_FireButton;         
     private float m_CurrentLaunchForce;  
@@ -45,7 +49,12 @@ public class TankShooting : MonoBehaviour
 
 			//at max charge, not fired yet
 			m_CurrentLaunchForce = m_MaxLaunchForce;
-			Fire ();
+
+			if (mature) {
+				FireEgg ();
+			} else {
+				Fire ();
+			}
 		}
 		else if (Input.GetButtonDown (m_FireButton)) {
 			//have we pressed fire for the first time?
@@ -67,6 +76,9 @@ public class TankShooting : MonoBehaviour
 			//we release the button, having not yet fired
 			Fire();
 		}
+
+		if (egg != null) {
+		}
 	}
 
 
@@ -84,4 +96,28 @@ public class TankShooting : MonoBehaviour
 
 		m_CurrentLaunchForce = m_MinLaunchForce;
     }
+
+	private void FireEgg()
+	{
+		// Instantiate and launch the shell.
+		m_Fired = true;
+
+		Rigidbody shellInstance = Instantiate (m_egg, m_FireTransform.position, m_FireTransform.rotation * Quaternion.Euler(0, -90, 0)) as Rigidbody;
+
+		egg = shellInstance;
+
+		shellInstance.GetComponent<eggExplosion> ().tank = this.gameObject;
+
+		shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
+
+		m_ShootingAudio.clip = m_FireClip;
+		m_ShootingAudio.Play ();
+
+		m_CurrentLaunchForce = m_MinLaunchForce;
+	}
+
+	public void resetAge()
+	{
+		thisTankAge.GetComponent<tankAge> ().age = 0;
+	}
 }
