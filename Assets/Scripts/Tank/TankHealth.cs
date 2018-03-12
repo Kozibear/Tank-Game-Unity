@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TankHealth : MonoBehaviour
@@ -11,11 +13,12 @@ public class TankHealth : MonoBehaviour
     public GameObject m_ExplosionPrefab;
     
     
-    private AudioSource m_ExplosionAudio;          
-    private ParticleSystem m_ExplosionParticles;   
-    public float m_CurrentHealth;  
-    private bool m_Dead;            
+    private AudioSource m_ExplosionAudio;
+    private ParticleSystem m_ExplosionParticles;
+    public float m_CurrentHealth;
+    private bool m_Dead;
 
+	public bool isParent;
 
     private void Awake()
     {
@@ -24,6 +27,17 @@ public class TankHealth : MonoBehaviour
 
         m_ExplosionParticles.gameObject.SetActive(false);
     }
+
+	public IEnumerator DieEventually()
+	{
+		while (isParent) {
+			yield return new WaitForSeconds (15);
+			OnDeath ();
+		}
+
+		yield return null;
+
+	}
 
 
     private void OnEnable()

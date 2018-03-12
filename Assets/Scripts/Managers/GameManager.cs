@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
+		SceneManager.LoadScene(0);
+
         if (m_GameWinner != null)
         {
             SceneManager.LoadScene(0);
@@ -85,15 +87,17 @@ public class GameManager : MonoBehaviour
 		m_CameraControl.SetStartPositionAndSize ();
 
 		m_RoundNumber++;
-		m_MessageText.text = "ROUND " + m_RoundNumber;
+		m_MessageText.text = "START!";
 
 		blueText.GetComponent<tankAge>().tank = m_Tanks [0].m_Instance;
 		blueText.GetComponent<tankAge> ().age = 0;
 		m_Tanks [0].m_Instance.gameObject.GetComponent<TankShooting> ().thisTankAge = blueText;
+		m_Tanks [0].m_Instance.name = "BlueTank";
 
 		redText.GetComponent<tankAge>().tank = m_Tanks [1].m_Instance;
 		redText.GetComponent<tankAge> ().age = 0;
 		m_Tanks[1].m_Instance.gameObject.GetComponent<TankShooting> ().thisTankAge = redText;
+		m_Tanks [1].m_Instance.name = "RedTank";
 
         yield return m_StartWait;
     }
@@ -133,6 +137,7 @@ public class GameManager : MonoBehaviour
 
 		string message = EndMessage ();
 		m_MessageText.text = message;
+
 
         yield return m_EndWait;
     }

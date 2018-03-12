@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4246649874524580}
   - component: {fileID: 33932703550297662}
   - component: {fileID: 23004819059721120}
+  - component: {fileID: 114871883270031814}
   m_Layer: 0
   m_Name: TankChassis
   m_TagString: Untagged
@@ -105,6 +106,7 @@ GameObject:
   - component: {fileID: 4473516527066254}
   - component: {fileID: 33768421902674774}
   - component: {fileID: 23107500080629372}
+  - component: {fileID: 114973935237808924}
   m_Layer: 0
   m_Name: TankTracksLeft
   m_TagString: Untagged
@@ -122,6 +124,7 @@ GameObject:
   - component: {fileID: 4623025100643974}
   - component: {fileID: 33703395639031166}
   - component: {fileID: 23851529421224310}
+  - component: {fileID: 114896095416712608}
   m_Layer: 0
   m_Name: TankTracksRight
   m_TagString: Untagged
@@ -170,6 +173,7 @@ GameObject:
   - component: {fileID: 4075773814501146}
   - component: {fileID: 33116403432794394}
   - component: {fileID: 23291526561518870}
+  - component: {fileID: 114990630247179156}
   m_Layer: 0
   m_Name: TankTurret
   m_TagString: Untagged
@@ -241,13 +245,14 @@ GameObject:
   - component: {fileID: 114303724587296938}
   - component: {fileID: 114985850882810348}
   - component: {fileID: 114490655218922822}
+  - component: {fileID: 114185102498079312}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1665883530913564
 GameObject:
   m_ObjectHideFlags: 1
@@ -330,7 +335,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124839027712250}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000009519595, y: 0, z: -0.07388233}
+  m_LocalPosition: {x: 0, y: 0, z: -0.07388233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4680283261801976}
@@ -412,7 +417,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662167623928020}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.791, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4680283261801976}
@@ -808,6 +813,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114185102498079312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662167623928020}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ab604dea1155040bd5b56421d63dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opposingTank: {fileID: 0}
+  isBlueTank: 0
+  isRedTank: 0
 --- !u!114 &114225433916890500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -938,6 +957,10 @@ MonoBehaviour:
   egg: {fileID: 0}
   thisTankAge: {fileID: 0}
   mature: 0
+  isParent: 0
+  shellXFactor: 0
+  shellYFactor: 0
+  shellZFactor: 0
 --- !u!114 &114516228920613270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1002,6 +1025,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114871883270031814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124839027712250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42efcd0c45c4d264dbef14e51bdb402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  colorStart: {r: 0, g: 0, b: 0, a: 0}
+  rustColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114875808395850060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1050,6 +1087,34 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114896095416712608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338223405071956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42efcd0c45c4d264dbef14e51bdb402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  colorStart: {r: 0, g: 0, b: 0, a: 0}
+  rustColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &114973935237808924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321968481997276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42efcd0c45c4d264dbef14e51bdb402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  colorStart: {r: 0, g: 0, b: 0, a: 0}
+  rustColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114985850882810348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1068,6 +1133,21 @@ MonoBehaviour:
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_ExplosionPrefab: {fileID: 151086, guid: ee49a9a8678ecf8468eb488e1ac8d42b, type: 2}
   m_CurrentHealth: 0
+  isParent: 0
+--- !u!114 &114990630247179156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1588835570865390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42efcd0c45c4d264dbef14e51bdb402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  colorStart: {r: 0, g: 0, b: 0, a: 0}
+  rustColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!198 &198294552649286656
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -7985,7 +8065,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8003,7 +8083,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

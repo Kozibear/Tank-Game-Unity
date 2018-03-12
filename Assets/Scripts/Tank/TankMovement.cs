@@ -50,20 +50,12 @@ public class TankMovement : MonoBehaviour
 
     private void Update()
     {
+		
         // Store the player's input and make sure the audio for the engine is playing.
 		m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
 		m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
 
 		EngineAudio ();
-
-
-		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age < 20) {
-			transform.localScale += new Vector3 (0.0015f, 0.0015f, 0.0015f);
-		}
-
-		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age >= 20) {
-		}
-
     }
 
 
@@ -95,6 +87,16 @@ public class TankMovement : MonoBehaviour
 	//only for updates to do with Physics
     private void FixedUpdate()
     {
+		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age < 20) {
+			transform.localScale += new Vector3 (0.0015f, 0.0015f, 0.0015f);
+		}
+
+		if (this.GetComponent<TankShooting>().thisTankAge.GetComponent<tankAge> ().age >= 20) {
+
+			m_Speed = 12 * ( (80 - (this.GetComponent<TankShooting> ().thisTankAge.GetComponent<tankAge> ().age - 20))/80 );
+			m_TurnSpeed = 180 * ( (80 - (this.GetComponent<TankShooting> ().thisTankAge.GetComponent<tankAge> ().age - 20))/80 );
+		}
+
         // Move and turn the tank.
 		Move();
 		Turn();
