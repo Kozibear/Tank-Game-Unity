@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
 
 	public static bool resetExplosions;
 
+	public Image greenArrow;
+	public Image redArrow;
+
     private void Start()
     {
         m_StartWait = new WaitForSeconds(m_StartDelay);
@@ -128,6 +131,207 @@ public class GameManager : MonoBehaviour
 			} 
 			else {
 				m_Tanks [1].m_Instance.GetComponent<TankShooting> ().canShoot = false;
+			}
+		}
+
+		//the arrow stuff:
+		if (this.gameObject.GetComponent<MusicManager> ().blueTankControls || this.gameObject.GetComponent<MusicManager> ().redTankControls) {
+
+			//for going forward
+			if (this.gameObject.GetComponent<MusicManager> ().normalTheme.isPlaying) {
+
+				if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 21f-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 22.5f+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 27-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 29+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 30-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 31.5F+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 48.5F-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 50+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 55-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 57+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 59.5F-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 61+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 66-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 68+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 92-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 94+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 100.2f-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 101.6f+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time < 103-7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().normalTheme.time > 105.2f+7f) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				}
+
+				else {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+			}
+			//for going backward
+			else if (this.gameObject.GetComponent<MusicManager> ().reversedTheme.isPlaying) {
+
+				if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (21f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 1 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (22.5f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (27-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 2 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (29f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (30f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 3 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (31.5f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (48.5f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 4 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (50f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (55f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 5 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (57f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+				
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (59.5f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 6 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (61f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (66f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 7 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (68f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (92f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 8 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (94f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (100.2f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 9 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (101.6f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+					
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time > this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (103f-7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
+				else if (LyricText.GetComponent<currentWords> ().textSelection == 10 && this.gameObject.GetComponent<MusicManager> ().reversedTheme.time < this.gameObject.GetComponent<MusicManager> ().reversedTheme.clip.length - (105.2f+7f)) {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = false;
+				} 
+
+				else {
+					greenArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+					redArrow.gameObject.GetComponent<arrowPhase> ().permanentFade = true;
+				}
 			}
 		}
 	}

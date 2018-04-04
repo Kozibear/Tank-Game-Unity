@@ -65,7 +65,8 @@ public class MusicManager : MonoBehaviour {
 			}
 
 			//when we lift the key up, we pause it
-			if (Input.GetKeyUp (KeyCode.W) && normalTheme.isPlaying) {
+			//or if we're not holding the key down, we pause it
+			if ((Input.GetKeyUp (KeyCode.W) || !Input.GetKey (KeyCode.W)) && normalTheme.isPlaying) {
 				PauseNormalSong ();
 			}
 
@@ -78,7 +79,7 @@ public class MusicManager : MonoBehaviour {
 			}
 
 			//when we lift the key up, we pause it
-			if (haveGoneForward && (Input.GetKeyUp (KeyCode.S) && reversedTheme.isPlaying)) {
+			if (haveGoneForward && ((Input.GetKeyUp (KeyCode.S) || !Input.GetKey (KeyCode.S)) && reversedTheme.isPlaying)) {
 				PauseReversedSong ();
 			}
 		}
@@ -94,7 +95,7 @@ public class MusicManager : MonoBehaviour {
 			}
 
 			//when we lift the key up, we pause it
-			if (Input.GetKeyUp (KeyCode.UpArrow) && normalTheme.isPlaying) {
+			if ((Input.GetKeyUp (KeyCode.UpArrow) || !Input.GetKey (KeyCode.UpArrow)) && normalTheme.isPlaying) {
 				PauseNormalSong ();
 			}
 
@@ -107,7 +108,7 @@ public class MusicManager : MonoBehaviour {
 			}
 
 			//when we lift the key up, we pause it
-			if (haveGoneForward && (Input.GetKeyUp (KeyCode.DownArrow) && reversedTheme.isPlaying)) {
+			if (haveGoneForward && ((Input.GetKeyUp (KeyCode.DownArrow) || !Input.GetKey (KeyCode.DownArrow)) && reversedTheme.isPlaying)) {
 				PauseReversedSong ();
 			}
 		}
@@ -122,18 +123,38 @@ public class MusicManager : MonoBehaviour {
 				PauseNormalSong ();
 			}
 		}
+
+		//if we rewind back to the beginning of the song, we set the normal theme back to the beginning as well
+		if (reversedTheme.time >= reversedTheme.clip.length) {
+			normalTheme.time = 0;
+		}
+
+		/*
 		//if we can explode the tank, the reversed theme is playing, and it's time is at 0, we make the current tank explode:
 		if (canExplodeTank && reversedTheme.time >= reversedTheme.clip.length)
 		{
 			this.GetComponent<GameManager> ().beginningOrEndOfSong = true;
 			canExplodeTank = false;
 		}
+		*/
 
 		//alternatively, if the normal time is playing, and we reach the end, we make the current tank explode:
 		if (canExplodeTank && normalTheme.time >= normalTheme.clip.length) 
 		{
 			this.GetComponent<GameManager> ().beginningOrEndOfSong = true;
 			canExplodeTank = false;
+		}
+
+
+		if (!Application.isFocused || !Application.isPlaying) {
+			
+			if (normalTheme.isPlaying){
+				PauseNormalSong ();
+			}
+
+			if (reversedTheme.isPlaying) {
+				PauseReversedSong ();
+			}
 		}
 	}
 
@@ -172,8 +193,10 @@ public class MusicManager : MonoBehaviour {
 
 	public void PlayReversedSong()
 	{
-		reversedTheme.Play ();
-		StartCoroutine(reversedSongDecibels());
+		if (normalTheme.time > 0) {
+			reversedTheme.Play ();
+			StartCoroutine (reversedSongDecibels ());
+		}
 	}
 
 	public IEnumerator normalSongDecibels()

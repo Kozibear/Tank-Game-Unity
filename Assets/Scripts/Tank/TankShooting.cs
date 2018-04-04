@@ -47,6 +47,7 @@ public class TankShooting : MonoBehaviour
 		m_AimSlider.value = m_MinLaunchForce;
 
 		if (canShoot) {
+			canShoot = false;
 
 			if (m_CurrentLaunchForce >= m_MaxLaunchForce && !m_Fired) {
 
@@ -97,9 +98,7 @@ public class TankShooting : MonoBehaviour
 
 			time.GetComponent<TimeCountdown>().resetNumber();
 		}
-
-		canShoot = true;
-
+			
         // Instantiate and launch the shell.
 		m_Fired = true;
 
@@ -107,9 +106,15 @@ public class TankShooting : MonoBehaviour
 
 		shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
 
+		if (m_CurrentLaunchForce == m_MaxLaunchForce) {
+			shellInstance.GetComponent<ShellExplosion> ().atMaxCharge = true;
+		}
+
 		m_ShootingAudio.clip = m_FireClip;
 		m_ShootingAudio.Play ();
 
 		m_CurrentLaunchForce = m_MinLaunchForce;
+
+		canShoot = true;
     }
 }

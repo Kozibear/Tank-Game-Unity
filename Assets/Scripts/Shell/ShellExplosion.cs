@@ -8,7 +8,9 @@ public class ShellExplosion : MonoBehaviour
     public float m_MaxDamage = 100f;                  
     public float m_ExplosionForce = 1000f;            
     public float m_MaxLifeTime = 2f;                  
-    public float m_ExplosionRadius = 5f;              
+    public float m_ExplosionRadius = 5f;
+
+	public bool atMaxCharge;
 
 	public GameObject explosion;
 
@@ -44,7 +46,12 @@ public class ShellExplosion : MonoBehaviour
 			targetHealth.TakeDamage (damage);
 		}
 		*/
-		Instantiate (explosion, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), explosion.transform.rotation);
+		GameObject ExplosionOrb = Instantiate (explosion, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), explosion.transform.rotation) as GameObject;
+
+		if (atMaxCharge)
+		{
+			ExplosionOrb.transform.localScale *= 2;
+		}
 
 		m_ExplosionParticles.transform.parent = null; //we no longer make it have a parent
 
