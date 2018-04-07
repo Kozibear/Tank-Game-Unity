@@ -10,7 +10,7 @@ public class SunRotation : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		this.transform.Rotate (Vector3.right*0.65f);
 	}
 }

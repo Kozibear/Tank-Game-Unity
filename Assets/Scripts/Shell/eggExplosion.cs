@@ -52,34 +52,34 @@ public class eggExplosion : MonoBehaviour {
 		float randZ;
 
 		//for the chassis:
-		randX = Random.Range (0.7f, 1.4f);
-		randY = Random.Range (0.7f, 1.4f);
-		randZ = Random.Range (0.7f, 1.4f);
+		randX = Random.Range (0.8f, 1.25f);
+		randY = Random.Range (0.8f, 1.25f);
+		randZ = Random.Range (0.8f, 1.25f);
 		tank.transform.GetChild(0).GetChild(0).localScale = new Vector3 (tank.transform.GetChild(0).GetChild(0).localScale.x * randX, tank.transform.GetChild(0).GetChild(0).localScale.y * randY, tank.transform.GetChild(0).GetChild(0).localScale.z * randZ);
 
 		//for the wheels:
-		randX = Random.Range (0.7f, 1.4f);
-		randY = Random.Range (0.7f, 1.4f);
-		randZ = Random.Range (0.7f, 1.4f);
+		randX = Random.Range (0.8f, 1.25f);
+		randY = Random.Range (0.8f, 1.25f);
+		randZ = Random.Range (0.8f, 1.25f);
 		tank.transform.GetChild(0).GetChild(1).localScale = new Vector3 (tank.transform.GetChild(0).GetChild(1).localScale.x * randX, tank.transform.GetChild(0).GetChild(1).localScale.y * randY, tank.transform.GetChild(0).GetChild(1).localScale.z * randZ);
 		tank.transform.GetChild(0).GetChild(2).localScale = new Vector3 (tank.transform.GetChild(0).GetChild(2).localScale.x * randX, tank.transform.GetChild(0).GetChild(2).localScale.y * randY, tank.transform.GetChild(0).GetChild(2).localScale.z * randZ);
 
 		//for the turret:
-		randX = Random.Range (0.7f, 1.4f);
-		randY = Random.Range (0.7f, 1.4f);
-		randZ = Random.Range (0.7f, 1.4f);
+		randX = Random.Range (0.8f, 1.25f);
+		randY = Random.Range (0.8f, 1.25f);
+		randZ = Random.Range (0.8f, 1.25f);
 		tank.transform.GetChild(0).GetChild(3).localScale = new Vector3 (tank.transform.GetChild(0).GetChild(3).localScale.x * randX, tank.transform.GetChild(0).GetChild(3).localScale.y * randY, tank.transform.GetChild(0).GetChild(3).localScale.z * randZ);
 
 		//for the missile size:
-		randX = Random.Range (0.7F, 1.4f);
-		randY = Random.Range (0.7F, 1.4f);
-		randZ = Random.Range (0.7F, 1.4f);
+		randX = Random.Range (0.8F, 1.25f);
+		randY = Random.Range (0.8F, 1.25f);
+		randZ = Random.Range (0.8F, 1.25f);
 		tank.transform.GetComponent<TankShooting> ().shellXFactor *= randX;
 		tank.transform.GetComponent<TankShooting> ().shellYFactor *= randY;
 		tank.transform.GetComponent<TankShooting> ().shellZFactor *= randZ;
 
 		//we change the emission value (brightness) for the tank's material:
-		randX = Random.Range(-30, 31);
+		randX = Random.Range(-25, 26);
 		if (tank.transform.GetChild (0).GetChild (0).GetComponent<TankRust> ().emissionLevel + randX < 0) {
 			tank.transform.GetChild (0).GetChild (0).GetComponent<TankRust> ().emissionLevel = 0;
 			tank.transform.GetChild (0).GetChild (1).GetComponent<TankRust> ().emissionLevel = 0;
@@ -100,7 +100,7 @@ public class eggExplosion : MonoBehaviour {
 		}
 
 		//we change the sound effects emitted by the tank:
-		randX = Random.Range(-0.5f, 0.5f);
+		randX = Random.Range(-0.6f, 0.4f);
 		tank.transform.GetComponent<TankShooting> ().m_ShootingAudio.pitch += randX;
 
 		/*

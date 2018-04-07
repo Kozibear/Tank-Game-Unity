@@ -25,6 +25,8 @@ public class parentTankStuff : MonoBehaviour {
 			opposingTank = GameObject.Find ("BlueTank");
 		}
 
-		transform.LookAt (opposingTank.transform);
+		if (opposingTank != null) {
+			transform.LookAt (opposingTank.transform);
+		}
 	}
 }

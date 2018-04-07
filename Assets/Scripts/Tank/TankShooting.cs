@@ -108,7 +108,7 @@ public class TankShooting : MonoBehaviour
     private void Fire()
     {
         // Instantiate and launch the shell.
-		if (!isParent) {
+		if (!isParent && thisTankAge.GetComponent<tankAge> ().age > 21) {
 			thisTankAge.GetComponent<tankAge> ().age += 2;
 		}
 

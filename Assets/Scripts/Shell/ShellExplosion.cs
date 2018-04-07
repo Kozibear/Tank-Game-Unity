@@ -63,7 +63,7 @@ public class ShellExplosion : MonoBehaviour
 
 		float relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;
 
-		float damage = relativeDistance * m_MaxDamage;
+		float damage = relativeDistance * m_MaxDamage / 2;
 
 		damage = Mathf.Max (0f, damage); //we make sure that it's not negative
 

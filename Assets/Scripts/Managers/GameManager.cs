@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     private TankManager m_RoundWinner;
     private TankManager m_GameWinner;       
 
+	public float tempBlueWins;
+	public float tempRedWins;
+
+	public AudioSource tanksSoundtrack;
+	public bool lowerVolume;
 
     private void Start()
     {
@@ -32,7 +37,26 @@ public class GameManager : MonoBehaviour
         SetCameraTargets();
 
         StartCoroutine(GameLoop());
+
+		GameSave.gameSave.Load ();
+
+		//so that it is automatically reset at the beginning of a round, in case an enitrely new game is played.
+		tempBlueWins = GameSave.gameSave.blueWins;
+		tempRedWins = GameSave.gameSave.redWins;
+
+		GameSave.gameSave.blueWins = 0;
+		GameSave.gameSave.redWins = 0;
+
+		GameSave.gameSave.Save ();
     }
+
+	public void FixedUpdate () 
+	{
+		if (lowerVolume)
+		{
+			tanksSoundtrack.volume -= 0.035f;
+		}
+	}
 
 
     private void SpawnAllTanks()
@@ -66,15 +90,15 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
-		SceneManager.LoadScene(0);
+		SceneManager.LoadScene ("Main", LoadSceneMode.Single);
 
         if (m_GameWinner != null)
         {
-            SceneManager.LoadScene(0);
+			SceneManager.LoadScene ("Main", LoadSceneMode.Single);
         }
         else
         {
-            StartCoroutine(GameLoop());
+            //StartCoroutine(GameLoop());
         }
     }
 
@@ -121,6 +145,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
+		lowerVolume = true;
+
+		GameSave.gameSave.blueWins = tempBlueWins;
+		GameSave.gameSave.redWins = tempRedWins;
+
 		blueText.GetComponent<tankAge> ().StopCoroutine ("TimeLoop");
 		redText.GetComponent<tankAge> ().StopCoroutine ("TimeLoop");
 
@@ -130,14 +159,36 @@ public class GameManager : MonoBehaviour
 
 		m_RoundWinner = GetRoundWinner ();
 
-		if (m_RoundWinner != null)
-			m_RoundWinner.m_Wins++;
+		if (m_RoundWinner != null) {
+
+			if (m_RoundWinner.m_Instance.ToString() == "BlueTank (UnityEngine.GameObject)") {
+
+				GameSave.gameSave.blueWins++;
+
+				m_Tanks [0].m_Wins = (int) GameSave.gameSave.blueWins;
+
+				m_Tanks [1].m_Wins = (int) GameSave.gameSave.redWins;
+			}
+
+			if (m_RoundWinner.m_Instance.ToString() == "RedTank (UnityEngine.GameObject)") {
+				
+				GameSave.gameSave.redWins++;
+
+				m_Tanks [1].m_Wins = (int) GameSave.gameSave.redWins;
+
+				m_Tanks [0].m_Wins = (int) GameSave.gameSave.blueWins;
+			}
+
+			//print (m_RoundWinner.m_Instance);
+			//m_RoundWinner.m_Wins++;
+		}
 
 		m_GameWinner = GetGameWinner ();
 
 		string message = EndMessage ();
 		m_MessageText.text = message;
 
+		GameSave.gameSave.Save ();
 
         yield return m_EndWait;
     }
@@ -183,6 +234,8 @@ public class GameManager : MonoBehaviour
 
     private string EndMessage()
     {
+		lowerVolume = true;
+
         string message = "DRAW!";
 
         if (m_RoundWinner != null)
@@ -227,4 +280,12 @@ public class GameManager : MonoBehaviour
             m_Tanks[i].DisableControl();
         }
     }
+
+	void OnApplicationQuit ()
+	{
+		GameSave.gameSave.blueWins = 0;
+		GameSave.gameSave.redWins = 0;
+
+		GameSave.gameSave.Save ();
+	}
 }
