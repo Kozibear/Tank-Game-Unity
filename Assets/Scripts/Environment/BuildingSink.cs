@@ -12,7 +12,7 @@ public class BuildingSink : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.timeSinceLevelLoad >= 2) {
+		if (Time.timeSinceLevelLoad >= 4) {
 			transform.position += new Vector3 (0, 0.0013f, 0);
 		} 
 		else {
